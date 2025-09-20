@@ -9,9 +9,16 @@
       padding: 0;
       background: radial-gradient(circle at center, #111 0%, #000 100%);
       font-family: 'Segoe UI', sans-serif;
-      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      min-height: 100vh;
+      padding-top: 20px;
       color: #ffd700;
       text-align: center;
+      overflow-x: hidden;
+      perspective: 1200px;
     }
 
     .ocultar {
@@ -23,8 +30,8 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 280px;
-      height: 180px;
+      width: 320px;
+      height: 200px;
       background: #222;
       border: 2px solid #ffd700;
       border-radius: 12px;
@@ -32,14 +39,15 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 1.5em;
+      font-size: 1.6em;
       cursor: pointer;
       z-index: 20;
     }
 
     h1 {
-      font-size: 2.5em;
-      margin-top: 40px;
+      font-size: 3em;
+      margin-top: 20px;
+      line-height: 1.2em;
       text-shadow: 0 0 10px #ffd700;
     }
 
@@ -49,11 +57,11 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 360px;
+      height: 400px;
     }
 
     .imagen-central {
-      width: 300px;
+      width: 380px;
       cursor: pointer;
       transition: transform 0.5s ease;
       animation: balanceo 4s ease-in-out infinite;
@@ -72,14 +80,15 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 320px;
+      width: 90vw;
+      max-width: 500px;
       padding: 20px;
       background: #222;
       border: 2px solid #ffd700;
       border-radius: 12px;
       box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
-      font-size: 1.1em;
-      line-height: 1.5em;
+      font-size: 1.3em;
+      line-height: 1.6em;
       opacity: 0;
       transition: opacity 1s ease;
       z-index: 5;
@@ -120,39 +129,6 @@
         opacity: 0;
       }
     }
-
-    audio {
-      margin-top: 40px;
-      filter: drop-shadow(0 0 5px #ffd700);
-    }
-
-    .carrusel-3d {
-      margin: 60px auto;
-      width: 300px;
-      height: 200px;
-      position: relative;
-      transform-style: preserve-3d;
-      animation: girar 20s linear infinite;
-    }
-
-    .carrusel-3d img {
-      position: absolute;
-      width: 200px;
-      height: auto;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-    }
-
-    .carrusel-3d img:nth-child(1) { transform: rotateY(0deg) translateZ(300px); }
-    .carrusel-3d img:nth-child(2) { transform: rotateY(90deg) translateZ(300px); }
-    .carrusel-3d img:nth-child(3) { transform: rotateY(180deg) translateZ(300px); }
-    .carrusel-3d img:nth-child(4) { transform: rotateY(270deg) translateZ(300px); }
-
-    @keyframes girar {
-      from { transform: rotateY(0deg); }
-      to   { transform: rotateY(360deg); }
-    }
-  </style>
 </head>
 <body>
 
@@ -181,55 +157,74 @@
     </audio>
 
     <div class="carrusel-3d" id="carrusel">
-      <img src="img1.jpeg" alt="Imagen 1">
-      <img src="img2.jpeg" alt="Imagen 2">
-      <img src="img3.jpeg" alt="Imagen 3">
-      <img src="img4.jpeg" alt="Imagen 4">
+      <div class="item"><img src="img1.jpeg"><div class="frase">Tu sonrisa ilumina todo 💛</div></div>
+      <div class="item"><img src="img2.jpeg"><div class="frase">Momentos que guardo en el alma 🌟</div></div>
+      <div class="item"><img src="img3.jpeg"><div class="frase">Eres luz en mi vida ✨</div></div>
+      <div class="item"><img src="img4.jpeg"><div class="frase">Gracias por estar 💐</div></div>
+      <div class="item"><img src="img5.jpeg"><div class="frase">Cada instante contigo vale oro 💫</div></div>
+      <div class="item"><img src="img6.jpeg"><div class="frase">Tu alegría contagia 💖</div></div>
+      <div class="item"><img src="img7.jpeg"><div class="frase">Te celebro hoy y siempre 🎉</div></div>
+      <div class="item"><img src="img8.jpeg"><div class="frase">Eres mi inspiración 🌈</div></div>
+      <div class="item"><img src="img9.jpeg"><div class="frase">Contigo todo es mejor 🌻</div></div>
+      <div class="item"><img src="img10.jpeg"><div class="frase">Este detalle es para ti 💌</div></div>
     </div>
-  </div>
-
-  <script>
-    function iniciarSecuencia() {
-      document.getElementById('cartaInicial').classList.add('ocultar');
-      document.getElementById('contenido').classList.remove('ocultar');
-      mostrarCarta();
-    }
-
-    function mostrarCarta() {
-      const contenedor = document.getElementById('contenedor');
-      const ramo = document.getElementById('ramo');
-      const carta = document.getElementById('carta');
-      const mariposas = document.getElementById('mariposas');
-      const carrusel = document.getElementById('carrusel');
-
-      contenedor.classList.add('ocultar-ramo');
-      contenedor.classList.add('mostrar-carta');
-      carrusel.style.display = 'none';
-
-      setTimeout(() => {
-        carta.style.opacity = 0;
-
-        for (let i = 0; i < 12; i++) {
-          const span = document.createElement('span');
-          span.textContent = '🦋';
-          span.style.left = `${Math.random() * 200 - 100}px`;
-          span.style.setProperty('--x', Math.random());
-          span.style.animationDelay = `${i * 0.2}s`;
-          mariposas.appendChild(span);
+    <script>
+      window.onload = function() {
+        function iniciarSecuencia() {
+          document.getElementById('cartaInicial').classList.add('ocultar');
+          document.getElementById('contenido').classList.remove('ocultar');
+          mostrarCarta();
         }
 
-        setTimeout(() => {
-          mariposas.innerHTML = '';
-          contenedor.classList.remove('mostrar-carta');
-          contenedor.classList.remove('ocultar-ramo');
-          carta.style.opacity = 0;
-          carrusel.style.display = 'block';
-        }, 4000);
+        window.iniciarSecuencia = iniciarSecuencia;
 
-      }, 20000);
-    }
-  </script>
+        function mostrarCarta() {
+          const contenedor = document.getElementById('contenedor');
+          const carta = document.getElementById('carta');
+          const mariposas = document.getElementById('mariposas');
+          const carrusel = document.getElementById('carrusel');
 
-</body>
+          contenedor.classList.add('ocultar-ramo');
+          contenedor.classList.add('mostrar-carta');
+          carrusel.style.display = 'none';
+
+          setTimeout(() => {
+            carta.style.opacity = 0;
+
+            for (let i = 0; i < 12; i++) {
+              const span = document.createElement('span');
+              span.textContent = '🦋';
+              span.style.left = `${Math.random() * 200 - 100}px`;
+              span.style.setProperty('--x', Math.random());
+              span.style.animationDelay = `${i * 0.2}s`;
+              mariposas.appendChild(span);
+            }
+
+            setTimeout(() => {
+              mariposas.innerHTML = '';
+              contenedor.classList.remove('mostrar-carta');
+              contenedor.classList.remove('ocultar-ramo');
+              carta.style.opacity = 0;
+              carrusel.style.display = 'block';
+            }, 4000);
+
+          }, 20000);
+
+          // Distribuir imágenes en cilindro 3D real
+          const items = carrusel.querySelectorAll('.item');
+          const total = items.length;
+          const angulo = 360 / total;
+          const imagenAncho = 260;
+          const espacioEntre = 20;
+          const radio = Math.round((imagenAncho + espacioEntre) / (2 * Math.tan(Math.PI / total)));
+
+          items.forEach((item, i) => {
+            const rotacion = i * angulo;
+            item.style.transform = `rotateY(${rotacion}deg) translateZ(${radio}px)`;
+          });
+        }
+      };
+    </script>
+  </body>
 </html>
 
