@@ -9,9 +9,15 @@
       padding: 0;
       background: radial-gradient(circle at center, #111 0%, #000 100%);
       font-family: 'Segoe UI', sans-serif;
-      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      min-height: 100vh;
+      padding-top: 20px;
       color: #ffd700;
       text-align: center;
+      overflow-x: hidden;
     }
 
     .ocultar {
@@ -23,8 +29,8 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 280px;
-      height: 180px;
+      width: 320px;
+      height: 200px;
       background: #222;
       border: 2px solid #ffd700;
       border-radius: 12px;
@@ -32,14 +38,15 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 1.5em;
+      font-size: 1.6em;
       cursor: pointer;
       z-index: 20;
     }
 
     h1 {
-      font-size: 2.5em;
-      margin-top: 40px;
+      font-size: 3em;
+      margin-top: 20px;
+      line-height: 1.2em;
       text-shadow: 0 0 10px #ffd700;
     }
 
@@ -49,11 +56,11 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 360px;
+      height: 400px;
     }
 
     .imagen-central {
-      width: 300px;
+      width: 380px;
       cursor: pointer;
       transition: transform 0.5s ease;
       animation: balanceo 4s ease-in-out infinite;
@@ -72,14 +79,15 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 320px;
+      width: 90vw;
+      max-width: 500px;
       padding: 20px;
       background: #222;
       border: 2px solid #ffd700;
       border-radius: 12px;
       box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
-      font-size: 1.1em;
-      line-height: 1.5em;
+      font-size: 1.3em;
+      line-height: 1.6em;
       opacity: 0;
       transition: opacity 1s ease;
       z-index: 5;
@@ -128,8 +136,8 @@
 
     .carrusel-3d {
       margin: 60px auto;
-      width: 300px;
-      height: 200px;
+      width: 400px;
+      height: 250px;
       position: relative;
       transform-style: preserve-3d;
       animation: girar 20s linear infinite;
@@ -137,7 +145,7 @@
 
     .carrusel-3d img {
       position: absolute;
-      width: 200px;
+      width: 260px;
       height: auto;
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
@@ -232,4 +240,6 @@
 
 </body>
 </html>
+
+
 
