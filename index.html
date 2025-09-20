@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Flores para ti 🌻</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at center, #111 0%, #000 100%);
+      font-family: 'Segoe UI', sans-serif;
+      overflow-x: hidden;
+      color: #ffd700;
+      text-align: center;
+    }
+
+    .ocultar {
+      display: none !important;
+    }
+
+    .carta-inicial {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 280px;
+      height: 180px;
+      background: #222;
+      border: 2px solid #ffd700;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5em;
+      cursor: pointer;
+      z-index: 20;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-top: 40px;
+      text-shadow: 0 0 10px #ffd700;
+    }
+
+    .contenedor-imagen {
+      margin-top: 20px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 360px;
+    }
+
+    .imagen-central {
+      width: 300px;
+      cursor: pointer;
+      transition: transform 0.5s ease;
+      animation: balanceo 4s ease-in-out infinite;
+    }
+
+    @keyframes balanceo {
+      0%   { transform: translateX(0); }
+      25%  { transform: translateX(10px); }
+      50%  { transform: translateX(0); }
+      75%  { transform: translateX(-10px); }
+      100% { transform: translateX(0); }
+    }
+
+    .carta-mensaje {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 320px;
+      padding: 20px;
+      background: #222;
+      border: 2px solid #ffd700;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+      font-size: 1.1em;
+      line-height: 1.5em;
+      opacity: 0;
+      transition: opacity 1s ease;
+      z-index: 5;
+    }
+
+    .mostrar-carta .carta-mensaje {
+      opacity: 1;
+    }
+
+    .ocultar-ramo .imagen-central {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .mariposas {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 6;
+    }
+
+    .mariposas span {
+      position: absolute;
+      font-size: 1.5em;
+      color: #ffeb3b;
+      animation: volar 4s ease-out forwards;
+    }
+
+    @keyframes volar {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(calc(-100px + 200px * var(--x)), -200px) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    audio {
+      margin-top: 40px;
+      filter: drop-shadow(0 0 5px #ffd700);
+    }
+
+    .carrusel-3d {
+      margin: 60px auto;
+      width: 300px;
+      height: 200px;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: girar 20s linear infinite;
+    }
+
+    .carrusel-3d img {
+      position: absolute;
+      width: 200px;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+
+    .carrusel-3d img:nth-child(1) { transform: rotateY(0deg) translateZ(300px); }
+    .carrusel-3d img:nth-child(2) { transform: rotateY(90deg) translateZ(300px); }
+    .carrusel-3d img:nth-child(3) { transform: rotateY(180deg) translateZ(300px); }
+    .carrusel-3d img:nth-child(4) { transform: rotateY(270deg) translateZ(300px); }
+
+    @keyframes girar {
+      from { transform: rotateY(0deg); }
+      to   { transform: rotateY(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="carta-inicial" onclick="iniciarSecuencia()" id="cartaInicial">
+    Dar clic aquí 🌻
+  </div>
+
+  <div id="contenido" class="ocultar">
+    <h1>Flores para ti 🌻<br>Feliz 21 de septiembre</h1>
+
+    <div class="contenedor-imagen" id="contenedor">
+      <img src="girasoles.png" class="imagen-central" id="ramo" alt="Ramo de girasoles">
+
+      <div class="carta-mensaje" id="carta">
+        Hola amor mío,<br><br>
+        Muchas gracias por todo. Eres una persona increíble y hoy 21 de septiembre no serás espectadora.<br><br>
+        Espero te guste este detalle que preparé con mucho amor.
+      </div>
+
+      <div class="mariposas" id="mariposas"></div>
+    </div>
+
+    <audio controls autoplay>
+      <source src="tu-cancion.mp3" type="audio/mpeg">
+      Tu navegador no soporta audio.
+    </audio>
+
+    <div class="carrusel-3d" id="carrusel">
+      <img src="img1.jpeg" alt="Imagen 1">
+      <img src="img2.jpeg" alt="Imagen 2">
+      <img src="img3.jpeg" alt="Imagen 3">
+      <img src="img4.jpeg" alt="Imagen 4">
+    </div>
+  </div>
+
+  <script>
+    function iniciarSecuencia() {
+      document.getElementById('cartaInicial').classList.add('ocultar');
+      document.getElementById('contenido').classList.remove('ocultar');
+      mostrarCarta();
+    }
+
+    function mostrarCarta() {
+      const contenedor = document.getElementById('contenedor');
+      const ramo = document.getElementById('ramo');
+      const carta = document.getElementById('carta');
+      const mariposas = document.getElementById('mariposas');
+      const carrusel = document.getElementById('carrusel');
+
+      contenedor.classList.add('ocultar-ramo');
+      contenedor.classList.add('mostrar-carta');
+      carrusel.style.display = 'none';
+
+      setTimeout(() => {
+        carta.style.opacity = 0;
+
+        for (let i = 0; i < 12; i++) {
+          const span = document.createElement('span');
+          span.textContent = '🦋';
+          span.style.left = `${Math.random() * 200 - 100}px`;
+          span.style.setProperty('--x', Math.random());
+          span.style.animationDelay = `${i * 0.2}s`;
+          mariposas.appendChild(span);
+        }
+
+        setTimeout(() => {
+          mariposas.innerHTML = '';
+          contenedor.classList.remove('mostrar-carta');
+          contenedor.classList.remove('ocultar-ramo');
+          carta.style.opacity = 0;
+          carrusel.style.display = 'block';
+        }, 4000);
+
+      }, 20000);
+    }
+  </script>
+
+</body>
+</html>
+
