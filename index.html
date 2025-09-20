@@ -18,6 +18,7 @@
       color: #ffd700;
       text-align: center;
       overflow-x: hidden;
+      perspective: 1200px; /* Mejora para efecto 3D */
     }
 
     .ocultar {
@@ -143,18 +144,40 @@
       animation: girar 20s linear infinite;
     }
 
-    .carrusel-3d img {
+    .carrusel-3d:hover {
+      animation-play-state: paused;
+    }
+
+    .item {
       position: absolute;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+    }
+
+    .item img {
       width: 260px;
-      height: auto;
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
     }
 
-    .carrusel-3d img:nth-child(1) { transform: rotateY(0deg) translateZ(300px); }
-    .carrusel-3d img:nth-child(2) { transform: rotateY(90deg) translateZ(300px); }
-    .carrusel-3d img:nth-child(3) { transform: rotateY(180deg) translateZ(300px); }
-    .carrusel-3d img:nth-child(4) { transform: rotateY(270deg) translateZ(300px); }
+    .frase {
+      position: absolute;
+      bottom: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.6);
+      color: #ffd700;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 1em;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+
+    .item:hover .frase {
+      opacity: 1;
+    }
 
     @keyframes girar {
       from { transform: rotateY(0deg); }
@@ -189,19 +212,17 @@
     </audio>
 
     <div class="carrusel-3d" id="carrusel">
-      <img src="img1.jpeg" alt="Imagen 1">
-      <img src="img2.jpeg" alt="Imagen 2">
-      <img src="img3.jpeg" alt="Imagen 3">
-      <img src="img4.jpeg" alt="Imagen 4">
-      <img src="img5.jpeg" alt="Imagen 5">
-      <img src="img6.jpeg" alt="Imagen 6">
-      <img src="img7.jpeg" alt="Imagen 7">
-      <img src="img8.jpeg" alt="Imagen 8">
-      <img src="img9.jpeg" alt="Imagen 9">
-      <img src="img10.jpeg" alt="Imagen 10">
+      <div class="item"><img src="img1.jpeg"><div class="frase">Tu sonrisa ilumina todo 💛</div></div>
+      <div class="item"><img src="img2.jpeg"><div class="frase">Momentos que guardo en el alma 🌟</div></div>
+      <div class="item"><img src="img3.jpeg"><div class="frase">Eres luz en mi vida ✨</div></div>
+      <div class="item"><img src="img4.jpeg"><div class="frase">Gracias por estar 💐</div></div>
+      <div class="item"><img src="img5.jpeg"><div class="frase">Cada instante contigo vale oro 💫</div></div>
+      <div class="item"><img src="img6.jpeg"><div class="frase">Tu alegría contagia 💖</div></div>
+      <div class="item"><img src="img7.jpeg"><div class="frase">Te celebro hoy y siempre 🎉</div></div>
+      <div class="item"><img src="img8.jpeg"><div class="frase">Eres mi inspiración 🌈</div></div>
+      <div class="item"><img src="img9.jpeg"><div class="frase">Contigo todo es mejor 🌻</div></div>
+      <div class="item"><img src="img10.jpeg"><div class="frase">Este detalle es para ti 💌</div></div>
     </div>
-  </div>
-
   <script>
     function iniciarSecuencia() {
       document.getElementById('cartaInicial').classList.add('ocultar');
@@ -211,7 +232,6 @@
 
     function mostrarCarta() {
       const contenedor = document.getElementById('contenedor');
-      const ramo = document.getElementById('ramo');
       const carta = document.getElementById('carta');
       const mariposas = document.getElementById('mariposas');
       const carrusel = document.getElementById('carrusel');
@@ -242,10 +262,26 @@
 
       }, 20000);
     }
-  </script>
 
+    // Distribuir automáticamente los ítems del carrusel en cilindro 3D real
+    const carrusel = document.getElementById('carrusel');
+    const items = carrusel.querySelectorAll('.item');
+    const total = items.length;
+    const angulo = 360 / total;
+
+    const imagenAncho = 260; // igual al ancho de cada imagen
+    const espacioEntre = 20; // margen visual entre imágenes
+    const radio = Math.round((imagenAncho + espacioEntre) / (2 * Math.tan(Math.PI / total)));
+
+    items.forEach((item, i) => {
+      const rotacion = i * angulo;
+      item.style.transform = `rotateY(${rotacion}deg) translateZ(${radio}px)`;
+    });
+  </script>
 </body>
 </html>
+
+
 
 
 
